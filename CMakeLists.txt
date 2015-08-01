@@ -27,5 +27,4 @@ macro(ADD_APPLICATION MAINFILE EXEC )
 endmacro()
 
 ADD_APPLICATION(main my_exe)
-ADD_APPLICATION(mm my_exe2)
   
