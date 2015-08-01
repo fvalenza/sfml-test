@@ -6,7 +6,7 @@ int main()
 {
   Game game;
   game.run();
-  
+
   // sf::RenderWindow window(sf::VideoMode(640, 480), "SFML Application!");
   // sf::CircleShape shape(40.f);
   // shape.setFillColor(sf::Color::Green);
