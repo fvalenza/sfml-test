@@ -10,6 +10,8 @@ namespace Textures
 {
   enum ID { Landscape
             , Airplane
+            , Eagle
+            , Raptor
             , Missile
           };
 }
@@ -70,4 +72,5 @@ protected:
   
 };
 
+typedef ResourceHolder< sf::Texture ,Textures::ID > TextureHolder;
 #endif

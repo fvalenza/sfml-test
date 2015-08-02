@@ -34,7 +34,7 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
   // Draw node and children with changed transform
   drawCurrent(target, states);
-  // drawChildren(target, states);
+  drawChildren(target, states);
 }
 
 void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const

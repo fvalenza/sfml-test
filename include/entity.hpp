@@ -5,8 +5,9 @@
 #include <memory>
 #include <cassert>
 #include <SFML/Graphics.hpp>
+#include "scene-node.hpp"
 
-class Entity
+class Entity : public SceneNode
 {
 public:
   void setVelocity(sf::Vector2f velocity);
