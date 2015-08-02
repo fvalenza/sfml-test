@@ -2,7 +2,8 @@
 
 Game::Game()
 : mWindow(sf::VideoMode(640, 480), "SFML Application!")
-, mPlayer(40.f)
+, mTexture()
+, mPlayer()
 , mIsMovingUp(false)
 , mIsMovingDown(false)
 , mIsMovingLeft(false)
@@ -10,7 +11,11 @@ Game::Game()
 , mPlayerSpeed(100.)
 , mTimePerFrame(sf::seconds(1.f/60.f))
 {
-  mPlayer.setFillColor(sf::Color::Green);
+  if( !mTexture.loadFromFile("../media/Textures/Eagle.png"))
+  {
+    // Handle loading error -> default texture ?
+  }
+  mPlayer.setTexture(mTexture);
   mPlayer.setPosition(100.f, 100.f);
 
 }
