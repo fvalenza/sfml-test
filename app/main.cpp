@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "game.hpp"
 #include "resource-holder.hpp"
+#include "aircraft.hpp"
+#include "scene-node.hpp"
 #include <iostream>
 
 int main()
