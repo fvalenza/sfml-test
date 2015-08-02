@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "game.hpp"
-#include "texture-holder.hpp"
+#include "resource-holder.hpp"
 #include <iostream>
 
 int main()
