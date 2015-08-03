@@ -21,6 +21,7 @@ private:
 protected:
   sf::RenderWindow mWindow;
   World mWorld;
+  bool mIsPaused;
 
 
   sf::Time mTimePerFrame;

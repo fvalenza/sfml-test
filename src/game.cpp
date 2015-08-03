@@ -3,6 +3,7 @@
 Game::Game()
 : mWindow(sf::VideoMode(640, 480), "SFML Application!")
 , mWorld(mWindow)
+, mIsPaused(false)
 , mTimePerFrame(sf::seconds(1.f/60.f))
 {
   
@@ -23,7 +24,10 @@ void Game::run()
     {                                           
       timeSinceLastUpdate -= mTimePerFrame;
       processEvents();
-      update(mTimePerFrame);
+      if (!mIsPaused)
+      {
+        update(mTimePerFrame);
+      }
     }
     render();
   }
@@ -34,6 +38,15 @@ void Game::processEvents()
   sf::Event event;
   while (mWindow.pollEvent(event))
   {
+    if(event.type == sf::Event::GainedFocus)
+    {
+      mIsPaused = false;
+    }
+    else if (event.type == sf::Event::LostFocus)
+    {
+      mIsPaused = true;
+    }
+
     switch(event.type)
     {
       case sf::Event::KeyPressed:
