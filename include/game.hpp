@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "world.hpp"
 
 class Game
 {
@@ -19,13 +20,9 @@ private:
   
 protected:
   sf::RenderWindow mWindow;
-  sf::Texture mTexture;
-  sf::Sprite mPlayer;
-  bool mIsMovingUp;
-  bool mIsMovingDown;
-  bool mIsMovingLeft;
-  bool mIsMovingRight;
-  float mPlayerSpeed;
+  World mWorld;
+
+
   sf::Time mTimePerFrame;
   
 };

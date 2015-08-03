@@ -2,22 +2,10 @@
 
 Game::Game()
 : mWindow(sf::VideoMode(640, 480), "SFML Application!")
-, mTexture()
-, mPlayer()
-, mIsMovingUp(false)
-, mIsMovingDown(false)
-, mIsMovingLeft(false)
-, mIsMovingRight(false)
-, mPlayerSpeed(100.)
+, mWorld(mWindow)
 , mTimePerFrame(sf::seconds(1.f/60.f))
 {
-  if( !mTexture.loadFromFile("../media/Textures/Eagle.png"))
-  {
-    // Handle loading error -> default texture ?
-  }
-  mPlayer.setTexture(mTexture);
-  mPlayer.setPosition(100.f, 100.f);
-
+  
 }
 
 void Game::run()
@@ -65,34 +53,26 @@ void Game::processEvents()
 
 void Game::update(sf::Time dt)
 {
-  sf::Vector2f movement(0.f, 0.f);
-  if (mIsMovingUp)
-    movement.y -= mPlayerSpeed;
-  if (mIsMovingDown)
-    movement.y += mPlayerSpeed;
-  if (mIsMovingLeft)
-    movement.x -= mPlayerSpeed;
-  if (mIsMovingRight)
-    movement.x += mPlayerSpeed;
-
-  mPlayer.move(movement * dt.asSeconds());
+  mWorld.update(dt);
 }
 
 void Game::render()
 {
   mWindow.clear();
-  mWindow.draw(mPlayer);
+  mWorld.draw();
+
+  mWindow.setView(mWindow.getDefaultView());
   mWindow.display();
 }
 
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
-  if (key == sf::Keyboard::Z)
-    mIsMovingUp = isPressed;
-  else if (key == sf::Keyboard::S)
-    mIsMovingDown = isPressed;
-  else if (key == sf::Keyboard::Q)
-    mIsMovingLeft = isPressed;
-  else if (key == sf::Keyboard::D)
-    mIsMovingRight = isPressed;
+  // if (key == sf::Keyboard::Z)
+  //   mIsMovingUp = isPressed;
+  // else if (key == sf::Keyboard::S)
+  //   mIsMovingDown = isPressed;
+  // else if (key == sf::Keyboard::Q)
+  //   mIsMovingLeft = isPressed;
+  // else if (key == sf::Keyboard::D)
+  //   mIsMovingRight = isPressed;
 }
