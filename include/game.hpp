@@ -6,7 +6,7 @@
 #include "world.hpp"
 #include "player.hpp"
 
-class Game
+class Game : private sf::NonCopyable
 {
 public:
   Game();
@@ -14,11 +14,9 @@ public:
   void run();
 
 private:
-  void processEvents();
   void processInput();
   void update(sf::Time dt);
   void render();
-  void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
   
 protected:
   sf::RenderWindow mWindow;

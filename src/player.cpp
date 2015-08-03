@@ -1,4 +1,7 @@
 #include "player.hpp"
+#include <map>
+#include <string>
+#include <algorithm>
 
 struct AircraftMover
 {
@@ -17,33 +20,90 @@ struct AircraftMover
 
 Player::Player()
 {
+  // Set initial key bindings
+  mKeyBinding[sf::Keyboard::Left] = MoveLeft;
+  mKeyBinding[sf::Keyboard::Right] = MoveRight;
+  mKeyBinding[sf::Keyboard::Up] = MoveUp;
+  mKeyBinding[sf::Keyboard::Down] = MoveDown;
+
+  // Set initial action bindings
+  initializeActions();  
+
+  // Assign all categories to player's aircraft
+  for(auto& pair : mActionBinding)
+    pair.second.category = Category::PlayerAircraft;
 
 }
 
 void Player::handleEvent( const sf::Event& event
                   , CommandQueue& commands)
 {
-  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+  if (event.type == sf::Event::KeyPressed)
   {
-    Command output;
-    output.category = Category::PlayerAircraft;
-    output.action = [] (SceneNode& s, sf::Time)
-    {
-      std::cout << s.getPosition().x << "."
-                << s.getPosition().y << std::endl;
-    };
-    commands.push(output);
+    // Check if pressed key appears in key binding, trigger command if so
+    auto found = mKeyBinding.find(event.key.code);
+    if (found != mKeyBinding.end() && !isRealTimeAction(found->second))
+      commands.push(mActionBinding[found->second]);
   }
 }
 void Player::handleRealTimeInput(CommandQueue& commands)
 {
-  const float playerSpeed = 30.f;
-
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+  for (auto pair : mKeyBinding)
   {
-    Command moveLeft;
-    moveLeft.category = Category::PlayerAircraft;
-    moveLeft.action = derivedAction<Aircraft>(AircraftMover(-playerSpeed,0.f));
-    commands.push(moveLeft);
+    // If key is pressed, lookup action and trigger corresponding command
+    if (sf::Keyboard::isKeyPressed(pair.first) && isRealTimeAction(pair.second))
+      commands.push(mActionBinding[pair.second]);
   }
+  
+}
+
+void Player::assignKey(Action action, sf::Keyboard::Key key)
+{
+  // Remove all keys that already map to action
+  for (auto itr = mKeyBinding.begin(); itr != mKeyBinding.end(); )
+  {
+    if (itr->second == action)
+      mKeyBinding.erase(itr++);
+    else
+      ++itr;
+  }
+
+  // Insert new binding
+  mKeyBinding[key] = action;
+}
+
+sf::Keyboard::Key Player::getAssignedKey(Action action) const
+{
+  for(auto pair : mKeyBinding)
+  {
+    if (pair.second == action)
+      return pair.first;
+  }
+
+  return sf::Keyboard::Unknown;
+}
+
+bool Player::isRealTimeAction(Action action)
+{
+  switch (action)
+  {
+    case MoveLeft:
+    case MoveRight:
+    case MoveDown:
+    case MoveUp:
+      return true;
+
+    default:
+      return false;
+  }
+}
+
+void Player::initializeActions()
+{
+  const float playerSpeed = 200.f;
+
+  mActionBinding[MoveLeft].action  = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.f));
+  mActionBinding[MoveRight].action = derivedAction<Aircraft>(AircraftMover(+playerSpeed, 0.f));
+  mActionBinding[MoveUp].action    = derivedAction<Aircraft>(AircraftMover(0.f, -playerSpeed));
+  mActionBinding[MoveDown].action  = derivedAction<Aircraft>(AircraftMover(0.f, +playerSpeed));
 }

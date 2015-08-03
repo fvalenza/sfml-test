@@ -10,6 +10,9 @@ Textures::ID toTextureID(Aircraft::Type type)
     case Aircraft::Raptor:
       return Textures::Raptor;
       break;
+    default:
+      return Textures::Eagle;
+      break;
   }
 }
 Aircraft::Aircraft(Type type, const TextureHolder& textures)
@@ -37,9 +40,4 @@ unsigned int Aircraft::getCategory() const
       return Category::EnnemyAircraft;
       break;
   }
-}
-
-void Aircraft::accelerate (sf::Vector2f velocityBoost)
-{
-  setVelocity(getVelocity() + velocityBoost);
 }
