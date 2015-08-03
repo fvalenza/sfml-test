@@ -49,6 +49,22 @@ sf::Vector2f SceneNode::getWorldPosition() const
   return getWorldTransform() * sf::Vector2f();
 }
 
+void SceneNode::onCommand(const Command& command, sf::Time dt)
+{
+  if (command.category & getCategory())
+    command.action(*this, dt);
+
+  for (Ptr& child : mChildren)
+  {
+    child->onCommand(command, dt);
+  }
+}
+
+unsigned int SceneNode::getCategory() const
+{
+  return Category::Scene;
+}
+
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const 
 {
   // Apply transform of current node

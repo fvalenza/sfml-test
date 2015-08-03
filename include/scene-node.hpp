@@ -6,7 +6,11 @@
 #include <algorithm>
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include "category.hpp"
+#include "command.hpp"
 
+
+// struct Command;
 
 class SceneNode
 : public sf::Transformable
@@ -23,6 +27,8 @@ public:
   void update(sf::Time dt);
   sf::Transform getWorldTransform() const;
   sf::Vector2f getWorldPosition() const;
+  void onCommand(const Command& command, sf::Time dt);
+  virtual unsigned int getCategory() const;
 
 private:
   virtual void draw(sf::RenderTarget& target
