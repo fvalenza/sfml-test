@@ -5,6 +5,7 @@
 #include "sprite-node.hpp"
 #include "resource-holder.hpp"
 #include "aircraft.hpp"
+#include "command-queue.hpp"
 #include <array>
 
 // Forward declaration
@@ -19,6 +20,8 @@ public:
   explicit  World( sf::RenderWindow& window);
   void update(sf::Time dt);
   void draw();
+  CommandQueue& getCommandQueue();
+
 
 private:
   void loadTextures();
@@ -43,6 +46,7 @@ private:
   sf::Vector2f mSpawnPosition;
   float mScrollSpeed;
   Aircraft* mPlayerAircraft;
+  CommandQueue mCommandQueue;
   
 protected:
   

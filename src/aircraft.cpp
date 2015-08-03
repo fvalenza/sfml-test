@@ -38,3 +38,8 @@ unsigned int Aircraft::getCategory() const
       break;
   }
 }
+
+void Aircraft::accelerate (sf::Vector2f velocityBoost)
+{
+  setVelocity(getVelocity() + velocityBoost);
+}

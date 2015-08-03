@@ -4,6 +4,7 @@ Game::Game()
 : mWindow(sf::VideoMode(640, 480), "SFML Application!")
 , mWorld(mWindow)
 , mIsPaused(false)
+, mPlayer()
 , mTimePerFrame(sf::seconds(1.f/60.f))
 {
   
@@ -62,6 +63,20 @@ void Game::processEvents()
       //   break;
     }
   }
+}
+void Game::processInput()
+{
+  sf::Event event;
+  CommandQueue& commands = mWorld.getCommandQueue();
+  while (mWindow.pollEvent(event))
+  {
+    mPlayer.handleEvent(event, commands);
+    if(event.type == sf::Event::Closed)
+    {
+      mWindow.close();
+    }
+  }
+  mPlayer.handleRealTimeInput(commands);
 }
 
 void Game::update(sf::Time dt)
