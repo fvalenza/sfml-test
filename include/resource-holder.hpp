@@ -8,14 +8,23 @@
 
 namespace Textures
 {
-  enum ID { Landscape
-            , Desert
-            , Airplane
-            , Eagle
-            , Raptor
-            , Missile
-          };
+  enum ID
+  {
+    Eagle,
+    Raptor,
+    Desert,
+    TitleScreen,
+  };
 }
+
+namespace Fonts
+{
+  enum ID
+  {
+    Main,
+  };
+}
+
 template < typename Resource, typename Identifier>
 class ResourceHolder
 {
@@ -74,4 +83,6 @@ protected:
 };
 
 typedef ResourceHolder< sf::Texture ,Textures::ID > TextureHolder;
+typedef ResourceHolder<sf::Font, Fonts::ID>     FontHolder;
+
 #endif

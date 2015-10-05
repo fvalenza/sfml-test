@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "game.hpp"
+#include "application.hpp"
 #include "resource-holder.hpp"
 #include "aircraft.hpp"
 #include "scene-node.hpp"
@@ -9,8 +9,8 @@ int main()
 {
   try
   {
-    Game game;
-    game.run();
+    Application app;
+    app.run();
   }
   catch ( std::exception& e)
   {
