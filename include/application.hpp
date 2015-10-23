@@ -12,6 +12,7 @@
 #include "game-state.hpp"
 #include "title-state.hpp"
 #include "menu-state.hpp"
+#include "pause-state.hpp"
 
 class Application : private sf::NonCopyable
 {
