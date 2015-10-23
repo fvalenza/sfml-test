@@ -11,6 +11,7 @@
 #include "state-stack.hpp"
 #include "game-state.hpp"
 #include "title-state.hpp"
+#include "menu-state.hpp"
 
 class Application : private sf::NonCopyable
 {
