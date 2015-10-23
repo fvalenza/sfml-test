@@ -40,5 +40,5 @@ void State::requestStateClear()
 
 State::Context State::getContext() const
 {
-
+  return mContext;
 }
