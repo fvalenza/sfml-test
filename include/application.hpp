@@ -9,6 +9,7 @@
 #include "world.hpp"
 #include "player.hpp"
 #include "state-stack.hpp"
+#include "game-state.hpp"
 
 class Application : private sf::NonCopyable
 {
