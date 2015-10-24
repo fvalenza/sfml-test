@@ -1,6 +1,7 @@
 #include <menu-state.hpp>
 #include <utility.hpp>
 #include <resource-holder.hpp>
+#include "music-player.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
@@ -32,6 +33,8 @@ MenuState::MenuState(StateStack& stack, Context context)
 	mOptions.push_back(exitOption);
 
 	updateOptionText();
+
+	context.music->play(Music::MenuTheme);
 }
 
 void MenuState::draw()

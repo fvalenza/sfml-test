@@ -5,8 +5,9 @@ Application::Application()
 , mWorld(mWindow)
 , mIsPaused(false)
 , mFonts()
+, mMusic()
 , mPlayer()
-, mStateStack(State::Context(mWindow, mTextures, mFonts, mPlayer))
+, mStateStack(State::Context(mWindow, mTextures, mFonts, mPlayer, mMusic))
 , mTimePerFrame(sf::seconds(1.f/60.f))
 , mStatisticsText()
 , mStatisticsUpdateTime()
@@ -23,6 +24,8 @@ Application::Application()
 
   registerStates();
   mStateStack.pushState(States::Title);
+
+  mMusic.setVolume(25.f);
 }
 
 void Application::run()
