@@ -43,7 +43,7 @@ void StateStack::pushState(States::ID stateID)
   mPendingList.push_back(PendingChange(Push, stateID));
 }
 void StateStack::popState()
-{std::cout << "hello " <<std::endl;
+{
   mPendingList.push_back(PendingChange(Pop));
 }
 void StateStack::clearStates()

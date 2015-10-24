@@ -8,6 +8,7 @@ set(SHARED
   sfml-graphics
   sfml-window
   sfml-system
+  sfml-audio
 )
 file(GLOB_RECURSE SRC src/*.cpp)
 
