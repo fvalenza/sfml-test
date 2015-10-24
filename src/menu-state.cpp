@@ -2,6 +2,7 @@
 #include <utility.hpp>
 #include <resource-holder.hpp>
 #include "music-player.hpp"
+#include "sound-player.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
@@ -11,6 +12,7 @@ MenuState::MenuState(StateStack& stack, Context context)
 : State(stack, context)
 , mOptions()
 , mOptionIndex(0)
+, mSounds(*context.sounds)
 {
 	sf::Texture& texture = context.textures->get(Textures::TitleScreen);
 	sf::Font& font = context.fonts->get(Fonts::Main);
@@ -63,6 +65,7 @@ bool MenuState::handleEvent(const sf::Event& event)
 	{
 		if (mOptionIndex == Play)
 		{
+			mSounds.play(SoundEffect::StartPlaying);
 			requestStackPop();
 			requestStackPush(States::Game);
 		}

@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 
+class SoundPlayer;
 
 class MenuState : public State
 {
@@ -33,6 +34,7 @@ class MenuState : public State
 
 		std::vector<sf::Text>	mOptions;
 		std::size_t				mOptionIndex;
+		SoundPlayer&			mSounds;
 };
 
 #endif // __SFML_MENUSTATE_HPP__

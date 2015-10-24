@@ -5,6 +5,7 @@
 #include <memory>
 #include <cassert>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
 
 namespace Textures
 {
@@ -22,6 +23,21 @@ namespace Fonts
   enum ID
   {
     Main,
+  };
+}
+
+namespace SoundEffect
+{
+  enum ID
+  {
+    AlliedGunFire,
+    EnnemyGunFire,
+    // Explosion1,
+    // Explosion2,
+    LaunchMissile,
+    CollectPickup,
+    Button,
+    StartPlaying,
   };
 }
 
@@ -84,5 +100,6 @@ protected:
 
 typedef ResourceHolder< sf::Texture ,Textures::ID > TextureHolder;
 typedef ResourceHolder<sf::Font, Fonts::ID>     FontHolder;
+typedef ResourceHolder<sf::SoundBuffer, SoundEffect::ID>     SoundBufferHolder;
 
 #endif

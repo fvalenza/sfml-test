@@ -14,6 +14,7 @@
 #include "menu-state.hpp"
 #include "pause-state.hpp"
 #include "music-player.hpp"
+#include "sound-player.hpp"
 
 class Application : private sf::NonCopyable
 {
@@ -36,6 +37,7 @@ protected:
   bool mIsPaused;
   FontHolder        mFonts;
   MusicPlayer mMusic;
+  SoundPlayer mSounds;
   Player mPlayer;
   StateStack mStateStack;
 
